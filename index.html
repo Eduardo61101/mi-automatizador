@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clima</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="app">
+
+        <header class="header">
+            <div>
+                <p class="mini-title">CLIMA ACTUAL</p>
+                <h1 id="city">Buscando ubicación...</h1>
+                <p id="country">Permite el acceso a tu ubicación</p>
+            </div>
+
+            <div class="location-icon">
+                📍
+            </div>
+        </header>
+
+
+        <section class="main-weather">
+
+            <div id="weatherIcon" class="weather-icon">
+                🌤️
+            </div>
+
+            <div>
+                <div class="temperature">
+                    <span id="temperature">--</span>°
+                </div>
+
+                <p id="description">
+                    Cargando clima...
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="details">
+
+            <div class="detail">
+                <span>🌡️</span>
+                <div>
+                    <small>Sensación</small>
+                    <strong id="feels">--°</strong>
+                </div>
+            </div>
+
+            <div class="detail">
+                <span>💧</span>
+                <div>
+                    <small>Humedad</small>
+                    <strong id="humidity">--%</strong>
+                </div>
+            </div>
+
+            <div class="detail">
+                <span>💨</span>
+                <div>
+                    <small>Viento</small>
+                    <strong id="wind">-- km/h</strong>
+                </div>
+            </div>
+
+            <div class="detail">
+                <span>🌧️</span>
+                <div>
+                    <small>Lluvia</small>
+                    <strong id="rain">--%</strong>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="forecast">
+
+            <h2>Pronóstico</h2>
+
+            <div id="forecastList">
+                Cargando...
+            </div>
+
+        </section>
+
+
+        <footer>
+            <p id="updated">
+                Actualizando...
+            </p>
+
+            <button onclick="obtenerUbicacion()">
+                📍 Actualizar ubicación
+            </button>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
