@@ -134,48 +134,47 @@ async function obtenerClima(lat, lon) {
 }
 
 
-
 async function obtenerCiudad(lat, lon) {
 
     try {
 
         const url =
-            "https://geocoding-api.open-meteo.com/v1/reverse" +
-            `?latitude=${lat}` +
-            `&longitude=${lon}` +
-            "&language=es" +
-            "&format=json";
+            `https://nominatim.openstreetmap.org/reverse` +
+            `?lat=${lat}` +
+            `&lon=${lon}` +
+            `&format=json` +
+            `&accept-language=es`;
 
-
-        const respuesta =
-            await fetch(url);
-
+        const respuesta = await fetch(url);
 
         if (!respuesta.ok) {
-
-            throw new Error(
-                "No se encontró la ciudad"
-            );
+            throw new Error("No se pudo obtener la ubicación");
         }
 
+        const datos = await respuesta.json();
 
-        const datos =
-            await respuesta.json();
+        const direccion = datos.address || {};
 
+        const ciudad =
+            direccion.city ||
+            direccion.town ||
+            direccion.municipality ||
+            direccion.village ||
+            "Ubicación actual";
 
-        if (datos.results && datos.results.length > 0) {
+        const estado =
+            direccion.state ||
+            "";
 
-            const lugar =
-                datos.results[0];
+        const pais =
+            direccion.country ||
+            "";
 
+        document.getElementById("city").textContent =
+            ciudad;
 
-            document.getElementById("city").textContent =
-                lugar.name || "Ubicación actual";
-
-
-            document.getElementById("country").textContent =
-                `${lugar.admin1 || ""}, ${lugar.country || ""}`;
-        }
+        document.getElementById("country").textContent =
+            `${estado}, ${pais}`;
 
     }
 
@@ -185,8 +184,12 @@ async function obtenerCiudad(lat, lon) {
 
         document.getElementById("city").textContent =
             "Ubicación actual";
+
+        document.getElementById("country").textContent =
+            "No se pudo determinar la ciudad";
     }
 }
+
 
 
 
